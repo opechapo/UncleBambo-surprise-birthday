@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@keyframes flipInX {
+  from {
+    transform: translate(-50%, -50%) rotateX(-90deg) scale(0.3);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) rotateX(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flipInY {
+  from {
+    transform: translate(-50%, -50%) rotateY(90deg) scale(0.3);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flipInDiagonal {
+  from {
+    transform: translate(-50%, -50%) rotateX(-70deg) rotateY(70deg) scale(0.2);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: translate(-50%, -50%) scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+  70% {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes zoomFlip {
+  from {
+    transform: translate(-50%, -50%) scale(0) rotate(360deg);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes tearOff {
+  to {
+    transform: translate(var(--dx), var(--dy)) rotate(var(--extra-rot))
+      scale(0.5);
+    opacity: 0;
+  }
+}
+
+.animate-flipInX {
+  animation: flipInX 1.2s ease-out forwards;
+}
+.animate-flipInY {
+  animation: flipInY 1.2s ease-out forwards;
+}
+.animate-flipInDiagonal {
+  animation: flipInDiagonal 1.4s ease-out forwards;
+}
+.animate-bounceIn {
+  animation: bounceIn 1s ease-out forwards;
+}
+.animate-zoomFlip {
+  animation: zoomFlip 1.3s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+.animate-tearOff {
+  animation: tearOff 2.5s ease-in forwards;
+}
