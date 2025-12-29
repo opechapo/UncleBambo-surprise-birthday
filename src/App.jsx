@@ -30,7 +30,7 @@ import Video6 from "./assets/videos/UncleBamboVideo6.mp4";
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [mode, setMode] = useState("photos"); // "photos" or "videos"
+  const [mode, setMode] = useState("photos");
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   const photoList = [
@@ -62,7 +62,7 @@ function App() {
     { src: Video6, type: "video" },
   ];
 
-  // Photo carousel effect
+  // Photo carousel
   useEffect(() => {
     if (mode !== "photos") return;
 
@@ -86,14 +86,12 @@ function App() {
     return () => clearInterval(interval);
   }, [mode]);
 
-  // Auto-loop videos
   const handleVideoEnd = () => {
     setCurrentVideoIndex((prev) =>
       prev === videoList.length - 1 ? 0 : prev + 1
     );
   };
 
-  // Manual navigation
   const goToPreviousVideo = () => {
     setCurrentVideoIndex((prev) =>
       prev === 0 ? videoList.length - 1 : prev - 1
@@ -108,16 +106,21 @@ function App() {
 
   return (
     <div className="w-screen h-screen relative overflow-hidden bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400">
-      {/* Title */}
-      <h1 className="text-white text-4xl md:text-7xl font-bold absolute top-8 left-1/2 -translate-x-1/2 z-50 text-center drop-shadow-2xl leading-tight">
-        Happy 60th Birthday,
-        <br className="md:hidden" /> Uncle Bambo! 🎉
+      {/* Title - Responsive */}
+      <h1 className="text-white font-bold absolute top-6 left-1/2 -translate-x-1/2 z-50 text-center drop-shadow-2xl leading-tight px-4">
+        <span className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl">
+          Happy 60th Birthday,
+        </span>
+        <br />
+        <span className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl">
+          Uncle Bambo! 🎉
+        </span>
       </h1>
 
       {/* ====================== PHOTO MODE ====================== */}
       {mode === "photos" && (
         <>
-          <div className="absolute inset-0 flex items-center justify-center">
+          <div className="absolute inset-0 flex items-center justify-center px-4">
             {cards.map((card, index) => (
               <Card
                 key={card.id}
@@ -130,16 +133,18 @@ function App() {
             ))}
           </div>
 
-          {/* Arrow to Videos */}
+          {/* Next Arrow - Responsive */}
           <button
             onClick={() => {
               setMode("videos");
               setCurrentVideoIndex(0);
             }}
-            className="absolute right-8 md:right-16 top-1/2 -translate-y-1/2 z-50 
+            className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-50 
                        bg-white/90 hover:bg-white text-purple-700 
-                       w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl 
-                       flex items-center justify-center text-4xl md:text-5xl
+                       w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 
+                       rounded-full shadow-2xl 
+                       flex items-center justify-center 
+                       text-3xl sm:text-4xl md:text-5xl
                        transition-all duration-300 hover:scale-110"
             aria-label="Watch videos"
           >
@@ -150,16 +155,14 @@ function App() {
 
       {/* ====================== VIDEO MODE ====================== */}
       {mode === "videos" && (
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-12 md:pb-16 px-8 md:px-16">
-          {/* Video - now lower and smaller to leave room below */}
-          <div className="relative w-full max-w-5xl mb-8">
-            <div className="aspect-video max-h-[60vh]">
-              {" "}
-              {/* Maintains aspect ratio */}
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-8 md:pb-12 lg:pb-16 px-4 sm:px-8">
+          {/* Video Container */}
+          <div className="relative w-full max-w-5xl mb-6 md:mb-10">
+            <div className="aspect-video max-h-[55vh] sm:max-h-[60vh] md:max-h-[65vh]">
               <video
                 key={currentVideoIndex}
                 src={videoList[currentVideoIndex].src}
-                className="w-full h-full object-contain rounded-3xl shadow-2xl bg-black"
+                className="w-full h-full object-contain rounded-2xl sm:rounded-3xl shadow-2xl bg-black"
                 autoPlay
                 muted={false}
                 playsInline
@@ -168,27 +171,29 @@ function App() {
             </div>
 
             {/* Video Counter */}
-            <div className="absolute top-4 right-4 bg-black/60 text-white px-5 py-3 rounded-full text-xl font-semibold">
+            <div className="absolute top-2 sm:top-4 right-2 sm:right-4 bg-black/70 text-white px-3 sm:px-5 py-2 sm:py-3 rounded-full text-base sm:text-xl font-semibold">
               {currentVideoIndex + 1} / {videoList.length}
             </div>
           </div>
 
-          {/* Caption + Controls Grouped Closely Together */}
-          <div className="flex flex-col items-center gap-6">
+          {/* Caption + Controls */}
+          <div className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8">
             {/* Caption */}
-            <div className="bg-white/90 px-10 py-5 rounded-full shadow-2xl">
-              <p className="text-2xl md:text-3xl font-bold text-gray-800 text-center">
+            <div className="bg-white/90 px-6 sm:px-10 py-4 sm:py-5 rounded-full shadow-2xl">
+              <p className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 text-center">
                 Videos from Family and Friends ❤️
               </p>
             </div>
 
-            {/* Previous & Next Arrows */}
-            <div className="flex items-center gap-12 md:gap-20">
+            {/* Navigation Arrows */}
+            <div className="flex items-center gap-8 sm:gap-12 md:gap-20">
               <button
                 onClick={goToPreviousVideo}
                 className="bg-white/90 hover:bg-white text-purple-700 
-                           w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl 
-                           flex items-center justify-center text-4xl md:text-5xl
+                           w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 
+                           rounded-full shadow-2xl 
+                           flex items-center justify-center 
+                           text-3xl sm:text-4xl md:text-5xl
                            transition-all duration-300 hover:scale-110"
                 aria-label="Previous video"
               >
@@ -198,8 +203,10 @@ function App() {
               <button
                 onClick={goToNextVideo}
                 className="bg-white/90 hover:bg-white text-purple-700 
-                           w-16 h-16 md:w-20 md:h-20 rounded-full shadow-2xl 
-                           flex items-center justify-center text-4xl md:text-5xl
+                           w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 
+                           rounded-full shadow-2xl 
+                           flex items-center justify-center 
+                           text-3xl sm:text-4xl md:text-5xl
                            transition-all duration-300 hover:scale-110"
                 aria-label="Next video"
               >
@@ -208,13 +215,15 @@ function App() {
             </div>
           </div>
 
-          {/* Back to Photos Arrow */}
+          {/* Back to Photos */}
           <button
             onClick={() => setMode("photos")}
-            className="absolute left-8 md:left-16 top-1/2 -translate-y-1/2 z-50 
+            className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-50 
                        bg-white/90 hover:bg-white text-purple-700 
-                       w-14 h-14 md:w-18 md:h-18 rounded-full shadow-2xl 
-                       flex items-center justify-center text-3xl md:text-4xl
+                       w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 
+                       rounded-full shadow-2xl 
+                       flex items-center justify-center 
+                       text-2xl sm:text-3xl md:text-4xl
                        transition-all duration-300 hover:scale-110"
             aria-label="Back to photos"
           >
